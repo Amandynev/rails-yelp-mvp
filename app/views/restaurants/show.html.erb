@@ -3,4 +3,22 @@
 <p><%= @restaurant.category %></p>
 <p><%= @restaurant.phone_number %></p>
 
-<%= link_to "Back to the list", restaurants_path(@restaurant)%>
+<% if @restaurant.reviews.empty? %>
+  <p>No reviews for this restaurant</p>
+<% else %>
+  <ul>
+    <% @restaurant.reviews.each do |review| %>
+      <li>
+        <%= review.content %> |
+        <%= review.rating %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+
+
+
+<%= link_to "Add a review", new_restaurant_review_path(@restaurant),  class: "btn btn-primary" %>
+
+<%= link_to "Back to the list", restaurants_path(@restaurant),  class: "btn btn-primary" %>
